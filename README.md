@@ -22,3 +22,5 @@ With clients, there is more programmatic work to be done. The majority of the cl
    * With AWS cli installed, manage user access token granted for 'Other' <br>
    * Checking aws configuration using `aws configure list`, `aws sts get-caller-identity`
 2. Bucket name convention
+
+![Screenshot 2023-06-14 at 17.58.57.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Ffp%2Fbrc1mdxj6876kynp0m3sdnlntsg1h6%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_WOdE95%2FScreenshot%202023-06-14%20at%2017.58.57.png)
