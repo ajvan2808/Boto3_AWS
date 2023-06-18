@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 import boto3
 from utilities import (create_bucket, create_temp_file,
                        create_bucket_and_obj_instances, upload_file_to_s3,
-                       download_file_from_s3, copy_object_to_bucket, delete_object)
+                       download_file_from_s3, copy_object_to_bucket, delete_object,
+                       encrypt_object_and_storage)
 from utilities import s3_resource
 
 load_dotenv()
@@ -35,3 +36,14 @@ if __name__ == '__main__':
 
     # Delete an Object
     delete_object(FIRST_S3_BUCKET_NAME, 'temp_file.txt')
+
+    # Object ACL
+    first_object_acl = first_object_inst.Acl()
+    print(first_object_acl)
+    print(first_object_acl.grants)
+
+    # make your object private/public again, without needing to re-upload it
+    update_request = first_object_acl.put(ACL='public-read')
+
+    # Encrypt files/object and define storage class
+    encrypt_request = encrypt_object_and_storage(first_object_inst)

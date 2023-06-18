@@ -144,3 +144,12 @@ def access_control_config(bucket):
     _response = second_object_acl.put(ACL='private')
 
     return second_object_acl
+
+
+# Object encryption
+def encrypt_object_and_storage(s3_object):
+    # if s3_object.put(ServerSideEncryption='AES256'):
+    print(s3_object.server_side_encryption)
+    if s3_object.put(StorageClass='STANDARD_IA'):
+        s3_object.reload()
+        print(s3_object.storage_class)

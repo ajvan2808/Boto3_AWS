@@ -17,12 +17,6 @@ At its core, all that Boto3 does is call AWS APIs on your behalf. For the majori
 
 With clients, there is more programmatic work to be done. The majority of the client operations give you a dictionary response. To get the exact information that you need, you’ll have to parse that dictionary yourself. With resource methods, the SDK does that work for you.
 
-### ✨ Blockers Solved
-1. Invalid access token of while trying to create S3 bucket under IAM user
-   * With AWS cli installed, manage user access token granted for 'Other' <br>
-   * Checking aws configuration using `aws configure list`, `aws sts get-caller-identity`
-2. Bucket name convention
-
 ### ✨ Naming Your Files
 In case of hosting a large number of files in your S3 bucket, keep this in mind. <br>
 If all your file names have a deterministic prefix that gets repeated for every file, such as a timestamp format like _`YYYY-MM-DDThh:mm:ss`_, then you will soon find that you’re running into **performance issues** when you’re trying to interact with your bucket. <br>
@@ -56,6 +50,14 @@ And delete an object using `.delete()`
 ### 💥 ACL (Access Control Lists)
 Access Control Lists (ACLs) help you manage access to your buckets and the objects within them. They are considered the **legacy way of administrating permissions to S3**. <br>
 By default, when you upload an object to S3, that object is private. You can set the object’s ACL to be public at creation time
+
+
+### ✨ Blockers Solved
+1. Invalid access token of while trying to create S3 bucket under IAM user
+   * With AWS cli installed, manage user access token granted for 'Other' <br>
+   * Checking aws configuration using `aws configure list`, `aws sts get-caller-identity`
+2. Bucket name convention
+3. Bucket permissions with ACL enabled in case making any ACL update. Make sure to un-check `Block public access` if you need to change the object into `public-read`
 
 
 
