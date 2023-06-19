@@ -1,4 +1,4 @@
-# Python, Boto3, and AWS S3 Practice
+# Python, Boto3, and AWS S3 Practice 
 
 ### ✨ Boto3
 Boto3 is the name of the Python SDK for AWS. It allows you to directly create, update, and delete AWS resources from your Python scripts. <br>
@@ -59,6 +59,10 @@ By default, when you upload an object to S3, that object is private. You can set
 2. Bucket name convention
 3. Bucket permissions with ACL enabled in case making any ACL update. Make sure to un-check `Block public access` if you need to change the object into `public-read`
 
-
+### 💡 Notes
+> - Any bucket related-operation that modifies the bucket in any way should be done via IaC. 
+> - If you want all your objects to act in the same way (all encrypted, or all public, for example), usually there is a way to do this directly using IaC, by adding a Bucket Policy or a specific Bucket property. 
+> - Bucket read operations, such as iterating through the contents of a bucket, should be done using Boto3. 
+> - Object-related operations at an individual object level should be done using Boto3
 
 ![Screenshot 2023-06-14 at 17.58.57.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Ffp%2Fbrc1mdxj6876kynp0m3sdnlntsg1h6%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_WOdE95%2FScreenshot%202023-06-14%20at%2017.58.57.png)
