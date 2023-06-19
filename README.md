@@ -51,6 +51,33 @@ And delete an object using `.delete()`
 Access Control Lists (ACLs) help you manage access to your buckets and the objects within them. They are considered the **legacy way of administrating permissions to S3**. <br>
 By default, when you upload an object to S3, that object is private. You can set the object’s ACL to be public at creation time
 
+### 💥 Encryption
+to add an extra layer of protection to your objects using the AES-256 server-side encryption algorithm offered by AWS
+
+### 💥 Storage
+Every object that you add to your S3 bucket is associated with a storage class. All the available storage classes offer high durability. You choose how you want to store your objects based on your application’s performance access requirements.
+At present, you can use the following storage classes with S3:
+
+- STANDARD: default for frequently accessed data
+- STANDARD_IA: for infrequently used data that needs to be retrieved rapidly when requested
+- ONEZONE_IA: for the same use case as STANDARD_IA, but stores the data in one Availability Zone instead of three
+- REDUCED_REDUNDANCY: for frequently used noncritical data that is easily reproducible
+
+> If you make changes to your object, you might find that your local instance doesn’t show them. What you need to do at that point is call `.reload()` to fetch the newest version of your object.
+
+### 💥 Versioning
+You should use versioning to keep a complete record of your objects over time. It also acts as a protection mechanism against accidental deletion of your objects. When you request a versioned object, Boto3 will retrieve the latest version.
+
+When you add a new version of an object, the storage that object takes in total is the sum of the size of its versions. So if you’re storing an object of 1 GB, and you create 10 versions, then you have to pay for 10GB of storage.
+
+### ✨ Traversals
+If you need to retrieve information from or apply an operation to all your S3 resources, Boto3 gives you several ways to iteratively traverse your buckets and your objects.
+- Bucket Traversal: traverse all the buckets in your account using `.all()` gives you the complete list of Bucket instances.
+- Object Traversal: you can using `.all()` as well for objects
+
+### ✨ Delete Buckets And Objects
+To remove all the buckets and objects you have created, you must first _make sure that your buckets have no objects_ within them.
+
 
 ### ✨ Blockers Solved
 1. Invalid access token of while trying to create S3 bucket under IAM user
