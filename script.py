@@ -4,9 +4,7 @@ import boto3
 from utilities import (create_bucket, create_temp_file,
                        create_bucket_and_obj_instances, upload_file_to_s3,
                        download_file_from_s3, copy_object_to_bucket, delete_object,
-                       encrypt_object_and_storage, versioning_bucket,
-                       get_object_version_id, fetch_buckets, fetch_objects,
-                       del_objects, del_bucket)
+                       encrypt_object_and_storage)
 from utilities import s3_resource
 
 load_dotenv()
@@ -20,13 +18,11 @@ if __name__ == '__main__':
     #                                                            s3_connection=s3_resource.meta.client)
 
     # Get temp file
-    file_name = create_temp_file(100, 'temp_file_2.txt', 'Ny ')
-    file_name_2 = create_temp_file(100, 'temp_file_3.txt', 'Haha ')
+    file_name = create_temp_file(200, 'temp_file.txt', 'sunny ')
     print(file_name)
 
     # Create instances of bucket and object
-    first_bucket_inst, first_object_inst = create_bucket_and_obj_instances(FIRST_S3_BUCKET_NAME, 'temp_file.txt')
-    s3_resource.Object(FIRST_S3_BUCKET_NAME, 'temp_file.txt').upload_file('temp_file_3.txt')
+    first_bucket_inst, first_object_inst = create_bucket_and_obj_instances(first_bucket_name, 'temp_file.txt')
     print(first_bucket_inst, first_object_inst)
 
     # Upload file
@@ -51,18 +47,3 @@ if __name__ == '__main__':
 
     # Encrypt files/object and define storage class
     encrypt_request = encrypt_object_and_storage(first_object_inst)
-
-    # Versioning bucket
-    print(versioning_bucket(FIRST_S3_BUCKET_NAME))
-    # return the latest available version of your objects
-    print(get_object_version_id(s3_resource.Object(FIRST_S3_BUCKET_NAME, 'temp_file.txt')))
-
-    # Retrieve buckets and objects
-    fetch_buckets()
-    print(fetch_objects(first_bucket_inst))
-
-    # Delete Objects and Buckets
-    del_objects(FIRST_S3_BUCKET_NAME)   # with versioned objects
-    del_objects(SECOND_S3_BUCKET_NAME)  # non-versioned objects
-
-    del_bucket(SECOND_S3_BUCKET_NAME)
